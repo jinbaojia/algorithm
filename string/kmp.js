@@ -14,7 +14,7 @@
 * 空间复杂度：O(1)
 * */
 
-const strStrByBF = (haystack, needle) => {
+const strStrByBF = (haystack, needle) => { 
     const hayLen = haystack.length;
     const needleLen = needle.length;
     if (!needleLen) {
