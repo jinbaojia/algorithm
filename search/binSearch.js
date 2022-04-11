@@ -5,7 +5,7 @@ const binSearch = (array, data) => {
   let upperBound = array.length - 1;
   let lowerBound = 0;
   while (lowerBound <= upperBound) {
-    const mid = Math.floor((lowerBound + upperBound) / 2);
+    const mid = Math.floor(lowerBound + (upperBound - lowerBound) / 2);
     if (array[mid] < data) {
       lowerBound = mid + 1;
     } else if (array[mid] > data) {
@@ -22,7 +22,7 @@ const recursiveBinSearch = (array, data, lo, hi) => {
   }
   lo === undefined && (lo = 0);
   hi === undefined && (hi = array.length - 1);
-  const mid = Math.floor((lo + hi) / 2);
+  const mid = Math.floor(lo + (hi - lo) / 2);
   if (array[mid] > data) {
     return recursiveBinSearch(array, data, lo, mid - 1);
   } else if (array[mid] < data) {
@@ -46,7 +46,7 @@ const binSearch2 = (array, data) => {
   let left = 0;
   let right = array.length;
   while (left < right) {
-    const mid = Math.floor((left + right) / 2);
+    const mid = Math.floor(left + (right - left) / 2);
     if (array[mid] === data) {
       return mid;
     } else if (array[mid] < data) {
@@ -75,7 +75,7 @@ const binSearch3 = (array, data) => {
   let left = 0;
   let right = array.length - 1;
   while (left + 1 < right) {
-    const mid = Math.floor((right + left) / 2);
+    const mid = Math.floor(left + (right - left) / 2);
     if (array[mid] == data) {
       return mid;
     } else if (array[mid] < data) {
