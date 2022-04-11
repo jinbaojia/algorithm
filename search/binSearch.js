@@ -38,7 +38,7 @@ const recursiveBinSearch = (array, data, lo, hi) => {
  * @param {*} data
  * @returns
  */
-const HiBinSearch = (array, data) => {
+const binSearch2 = (array, data) => {
   if (array === null || array.length === 0) {
     return -1;
   }
@@ -55,9 +55,38 @@ const HiBinSearch = (array, data) => {
       right = mid;
     }
   }
-  if (left != array.length && array[left] == target) return left;//当left+1 === right时，不会进入循环，所以要判断
+  if (left != array.length && array[left] == target) return left; //当left+1 === right时，不会进入循环，所以要判断
   return -1;
 };
 
+/**
+ * 实现二分查找的另一种方法。
+ *搜索条件需要访问元素的直接左右邻居。
+ *使用元素的邻居来确定它是向右还是向左。
+ *保证查找空间在每个步骤中至少有 3 个元素。
+ *需要进行后处理。 当剩下 2 个元素时，循环 / 递归结束。 需要评估其余元素是否符合条件
+ * @param {*} array
+ * @param {*} data
+ */
+const binSearch3 = (array, data) => {
+  if (array === null || array.length === 0) {
+    return -1;
+  }
+  let left = 0;
+  let right = array.length - 1;
+  while (left + 1 < right) {
+    const mid = Math.floor((right + left) / 2);
+    if (array[mid] == data) {
+      return mid;
+    } else if (array[mid] < data) {
+      left = mid;
+    } else {
+      right = mid;
+    }
+  }
+  if (nums[left] == data) return left;
+  if (nums[right] == data) return right;
+};
+
 const list = [1, 2, 3, 4, 5];
-console.log(HiBinSearch(list, 2));
+console.log(binSearch2(list, 2));
