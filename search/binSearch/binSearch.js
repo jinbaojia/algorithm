@@ -58,6 +58,7 @@ const binSearch2 = (array, data) => {
 
 /**
  * 寻找右侧边界的二分搜索
+ * findClosestElements 是此版本的应用
  */
 const binSearch3 = (array, data) => {
   if (array === null || array.length === 0) {
@@ -82,7 +83,6 @@ const binSearch3 = (array, data) => {
 /**
  *
  * 第四个版本可以在匹配中是，找到临近匹配值的左右节点 [1,1,1,10,10,10] 匹配1 时，得到[1,1,10]
- *
  *
  * 实现二分查找的另一种方法。
  *搜索条件需要访问元素的直接左右邻居。
