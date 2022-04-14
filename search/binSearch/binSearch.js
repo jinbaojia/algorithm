@@ -59,6 +59,7 @@ const binSearch2 = (array, data) => {
 /**
  * 寻找右侧边界的二分搜索
  * findClosestElements 是此版本的应用
+ * nextGreatestLetter.js 寻找右侧边界的下一个值
  */
 const binSearch3 = (array, data) => {
   if (array === null || array.length === 0) {
