@@ -1,11 +1,11 @@
 //https://leetcode-cn.com/problems/find-the-duplicate-number/
 //287
-//给定一个包含 n + 1 个整数的数组 nums ，其数字都在 [1, n] 范围内（包括 1 和 n），可知至少存在一个重复的整数。
-//假设 nums 只有 一个重复的整数 ，返回 这个重复的数 。
+//给定一个包n + 1 个整数的数组nums ，其数字都在[1, n]范围内（包括 1 和 n），可知至少存在一个重复的整数。
+//假设 nums 只有 一个重复的整数 ，返回这个重复的数 。
 //你设计的解决方案必须 不修改 数组 nums 且只用常量级 O(1) 的额外空间。
 //https://leetcode-cn.com/problems/find-the-duplicate-number/solution/by-longluo-e315/
 //set 时间O(n) 空间O(n)
-const findDuplicateWithSet = function (nums) {
+const findDuplicateWithSet = function(nums) {
   const set = new Set();
   for (let i = 0; i < nums.length; i++) {
     const element = nums[i];
@@ -55,25 +55,37 @@ const findDuplicate_index_sort = (nums) => {
   return 0;
 };
 
-//二分
-const findDuplicateWithBinSearch = function (nums) {
-  const n = nums.length;
-  let l = 1;
-  let r = n - 1;
-  let ans = -1;
-  while (l <= r) {
-    let mid = l + Math.floor((r - l) / 2);
+/**
+ * ===============不适用额外空间，不需要改变数组=========
+ */
+
+/**
+ * 二分法，不是常规解法，时间换空间，
+ * 时间O(nlogn) 空间O(1)
+ * 有[1-n]个抽屉，放[1-n+1]个苹果，如果1号抽屉放1号苹果，就必定有一个抽屉多放一个或多个苹果;
+ * 此时用二分法查找抽屉mid,此时遍历整个数组，找小于等于mid的数的总数cnt(苹果总数);
+ * 如果cnt大于mid,则说明，在[left-mid]这个区间里有一个抽屉多方了苹果；
+ * 如果cnt小于等于mid,则说明没有，应该在[mid+1,right]里继续二分
+ */
+const findDuplicateWithBinSearch = function(nums) {
+  let left = 1;
+  const length = nums.length;
+  let right = length - 1;
+  while (left < right) {
+    const mid = left + Math.floor((right - left) / 2);
     let cnt = 0;
-    for (let i = 0; i < n; ++i) {
-      cnt += nums[i] <= mid;
+    for (let i = 0; i < length; i++) {
+      if (nums[i] <= mid) {
+        cnt++;
+      }
     }
-    if (cnt <= mid) {
-      l = mid + 1;
+
+    if (cnt > mid) {
+      right = mid;
     } else {
-      r = mid - 1;
-      ans = mid;
+      left = mid + 1;
     }
   }
-  return ans;
+  return left;
 };
-console.log(findDuplicate_index_sort([1, 3, 4, 2, 2]));
+console.log(findDuplicateWithBinSearch([1, 3, 4, 2, 2]));
