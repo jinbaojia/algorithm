@@ -5,7 +5,7 @@
 //你设计的解决方案必须 不修改 数组 nums 且只用常量级 O(1) 的额外空间。
 //https://leetcode-cn.com/problems/find-the-duplicate-number/solution/by-longluo-e315/
 //set 时间O(n) 空间O(n)
-const findDuplicateWithSet = function(nums) {
+const findDuplicateWithSet = function (nums) {
   const set = new Set();
   for (let i = 0; i < nums.length; i++) {
     const element = nums[i];
@@ -67,7 +67,7 @@ const findDuplicate_index_sort = (nums) => {
  * 如果cnt大于mid,则说明，在[left-mid]这个区间里有一个抽屉多方了苹果；
  * 如果cnt小于等于mid,则说明没有，应该在[mid+1,right]里继续二分
  */
-const findDuplicateWithBinSearch = function(nums) {
+const findDuplicateWithBinSearch = function (nums) {
   let left = 1;
   const length = nums.length;
   let right = length - 1;
@@ -88,4 +88,23 @@ const findDuplicateWithBinSearch = function(nums) {
   }
   return left;
 };
-console.log(findDuplicateWithBinSearch([1, 3, 4, 2, 2]));
+
+/**
+ * 快慢指针
+ */
+const findDuplicate_fastSlow = (nums) => {
+  let slow = 0,
+    fast = 0;
+  do {
+    slow = nums[slow];
+    fast = nums[nums[fast]];
+  } while (slow != fast);
+  slow = 0;
+  while (slow != fast) {
+    slow = nums[slow];
+    fast = nums[fast];
+  }
+  return slow;
+};
+console.log(findDuplicate_fastSlow([1, 3, 4, 2, 2]));
+// 1,5,3,2,4,3
